@@ -1,28 +1,17 @@
 SET SERVEROUTPUT ON;
 
-CREATE OR REPLACE FUNCTION count_students (
-    DepartmentID NUMBER
+CREATE OR REPLACE FUNCTION COUNT_STUDENTS (
+    DepartmentID IN NUMBER
 )
 RETURN NUMBER
 IS
-    v_count NUMBER;
+    student_count NUMBER;
 BEGIN
     SELECT COUNT(*)
-    INTO v_count
+    INTO student_count
     FROM Student
-    WHERE Student.DepartmentID = DepartmentID;
+    WHERE DepartmentID = COUNT_STUDENTS.DepartmentID;
 
-    RETURN v_count;
-END;
-/
-
-DECLARE
-    v_total NUMBER;
-BEGIN
-    v_total := count_students(10);
-
-    DBMS_OUTPUT.PUT_LINE(
-        'Number of students in Department 10 = ' || v_total
-    );
+    RETURN student_count;
 END;
 /
