@@ -1,18 +1,15 @@
-SET SERVEROUTPUT ON;
-
-CREATE OR REPLACE FUNCTION COUNT_STUDENTS
-(
-    DepartmentID NUMBER
+CREATE OR REPLACE FUNCTION COUNT_STUDENTS (
+    p_DepartmentID IN NUMBER
 )
 RETURN NUMBER
 IS
-    student_count NUMBER;
+    v_count NUMBER;
 BEGIN
     SELECT COUNT(*)
-    INTO student_count
+    INTO v_count
     FROM Student
-    WHERE Student.DepartmentID = DepartmentID;
+    WHERE DepartmentID = p_DepartmentID;
 
-    RETURN student_count;
+    RETURN v_count;
 END;
 /
